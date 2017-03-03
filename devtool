@@ -103,6 +103,27 @@ _devtool_devtool() {
     esac
 }
 
+_devtool_create_workspace() {
+
+    local boolean_flags="
+        --help -h
+        --create-only
+    "
+
+    echo "cur=${cur}" >>completion.out
+    case "$cur" in
+        -*)
+            COMPREPLY=( $( compgen -W "$boolean_flags" -- "$cur" ) )
+            return
+            ;;
+    esac
+
+    # Only complete a single directory parameter
+    if [ ${prev//-/_} == $command ] || [[ $prev == -* ]]; then
+        _filedir -d
+    fi
+}
+
 _devtool()
 {
     local previous_extglob_setting=$(shopt -p extglob)
