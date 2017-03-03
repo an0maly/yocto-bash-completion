@@ -162,6 +162,7 @@ _devtool()
             # Must be a subcommand encountered
             *)
                 command="${words[$counter]}"
+                command=${command//-/_}
                 command_pos=$counter
                 break
                 ;;
