@@ -122,6 +122,10 @@ _devtool_search() {
     __devtool_just_help
 }
 
+_devtool_status() {
+    __devtool_just_help
+}
+
 _devtool_create_workspace() {
 
     local boolean_flags="
