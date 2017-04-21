@@ -118,6 +118,10 @@ __devtool_just_help() {
     esac
 }
 
+_devtool_search() {
+    __devtool_just_help
+}
+
 _devtool_create_workspace() {
 
     local boolean_flags="
