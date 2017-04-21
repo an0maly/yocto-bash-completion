@@ -178,6 +178,15 @@ _devtool()
         update-recipe
         status
         reset
+        edit-recipe
+        configure-help
+        finish
+        package
+        runqemu
+        build-sdk
+        sync
+        sdk-update
+        sdk-install
     )
 
     local color
