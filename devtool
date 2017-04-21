@@ -103,6 +103,21 @@ _devtool_devtool() {
     esac
 }
 
+__devtool_just_help() {
+
+    local boolean_flags="
+        --help -h
+    "
+
+    echo "cur=${cur}" >>completion.out
+    case "$cur" in
+        -*)
+            COMPREPLY=( $( compgen -W "$boolean_flags" -- "$cur" ) )
+            return
+            ;;
+    esac
+}
+
 _devtool_create_workspace() {
 
     local boolean_flags="
