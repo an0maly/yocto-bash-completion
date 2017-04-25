@@ -13,6 +13,11 @@
 __devtool_previous_extglob_setting=$(shopt -p extglob)
 shopt -s extglob
 
+__devtool_complete_recipies_local() {
+    local local_recipies="$(devtool status | sed -e's/:.*//')"
+    COMPREPLY=( $(compgen -W "$local_recipies" -- "$cur") )
+}
+
 # __devtool_to_alternatives transforms a multiline list of strings into a single line
 # string with the words separated by `|`.
 # This is used to prepare arguments to __devtool_pos_first_nonflag().
