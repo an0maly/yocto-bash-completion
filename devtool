@@ -173,6 +173,64 @@ _devtool_build() {
     fi
 }
 
+_devtool_deploy_target() {
+
+    local boolean_flags="
+        --help -h
+        -c --no-host-check
+        -s --show-status
+        -n --dry-run
+        -p --no-preserve
+        --no-check-space
+    "
+
+    echo "cur=${cur}" >>completion.out
+    case "$cur" in
+        -*)
+            COMPREPLY=( $( compgen -W "$boolean_flags" -- "$cur" ) )
+            return
+            ;;
+    esac
+
+    # Only complete a single recipe parameter
+    if [ ${prev//-/_} == $command ] || [[ $prev == -* ]]; then
+        __devtool_complete_recipies_local
+        return
+    fi
+
+    _known_hosts_real -a "$cur"
+}
+
+_devtool_undeploy_target() {
+
+    local boolean_flags="
+        --help -h
+        -c --no-host-check
+        -s --show-status
+        -a --all
+        -n --dry-run
+    "
+
+    echo "cur=${cur}" >>completion.out
+    case "$cur" in
+        -*)
+            COMPREPLY=( $( compgen -W "$boolean_flags" -- "$cur" ) )
+            return
+            ;;
+    esac
+
+    # Need to look for -a/--all to see if recipe is optional
+
+    # Only complete a single recipe parameter
+    if [ ${prev//-/_} == $command ] || [[ $prev == -* ]]; then
+        __devtool_complete_recipies_local
+        return
+    fi
+
+
+    _known_hosts_real -a "$cur"
+}
+
 _devtool()
 {
     local previous_extglob_setting=$(shopt -p extglob)
